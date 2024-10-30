@@ -108,46 +108,10 @@ const loginUser = async (req, res) => {
     }
 };
 
-const updateById = async (req, res) => {
-    try {
-        const id = req.params.id;
-        const userExist = await User.findOne({ _id: id });
-        if (!userExist) {
-            return res.status(400).json({ message: "User does not exists!!" });
-        }
-        const updateUser = await User.findByIdAndUpdate(id, req.body, {new: true});
-
-        res.status(200).json({ message: `${updateUser}User profile updated successfully!!`})
-    } catch(error) {
-        res.status(500).json({ message: error.message });
-    }
-};
-
-const deleteUsers = async (req, res) => {
-    try {
-        const id = req.params.id;
-
-        const userExist = await User.findOne({ _id: id });
-
-        if (!userExist) {
-            return res.status(404).json({ message: "User does not exist!"})
-        }
-        const deleteUser = await User.findByIdAndDelete(id);
-
-        if (!deleteUser) {
-            return res.status(404).json({ error: "User not found!"})
-        }
-        res.status(200).json({ message: "User successfully deleted!"});
-    } catch(error) {
-        res.status(500).json({error: error.message})
-    }
-};
 
 module.exports = {
     getUsers,
     getUserProfile,
     registerUser,
     loginUser,
-    updateById,
-    deleteUsers
 };
