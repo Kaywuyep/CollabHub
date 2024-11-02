@@ -58,6 +58,8 @@ const registerUser = async (req, res) => {
             email,
             password: hashedPassword,
         });
+        // const savedUser = await newUser.save();
+        // console.log("User successfully registered:", savedUser);
 
 
         res.status(201).json({ message: "User successfully added", user: newUser });

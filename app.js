@@ -40,7 +40,7 @@ app.use(cors({
 }));
 
 // Use routes
-app.use('/v1/collabhub/users', userRouter);
+app.use('/users', userRouter);
 
 
 module.exports= app;
