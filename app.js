@@ -38,7 +38,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({
    origin: '*', // Allow requests from all origin
    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-   credentials: true // Enable if you're using cookies/sessions
+   credentials: false // disable if you're using cookies/sessions
 }));
 
 // Use routes
