@@ -37,6 +37,8 @@ app.use(express.urlencoded({ extended: true }));
 // Use the CORS middleware
 app.use(cors({
    origin: '*', // Allow requests from all origin
+   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+   credentials: true // Enable if you're using cookies/sessions
 }));
 
 // Use routes
