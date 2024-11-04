@@ -22,9 +22,11 @@ dotenv.config();
 connectDB();
 
 // Use the CORS middleware
-app.use(cors({
-   origin: '*', // Allow requests from all origin
-}));
+// app.use(cors({
+//    origin: '*', // Allow requests from all origin
+// }));
+
+app.use(cors())
 
 
 // install view engine
