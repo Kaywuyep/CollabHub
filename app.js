@@ -21,41 +21,11 @@ dotenv.config();
 // Connect to the database
 connectDB();
 
-// // Use the CORS middleware
-// app.use(cors({
-//    origin: '*', // Allow requests from all origin
-// }));
+// Use the CORS middleware
+app.use(cors({
+   origin: '*', // Allow requests from all origin
+}));
 
-// CORS Configuration
-const corsOptions = {
-   origin: [
-       'https://aa-collab-hub-pro-85dt.vercel.app',  // Your Vercel frontend
-       'http://localhost:3000',                       // Local development
-       'http://localhost:5173'                        // Vite default port
-   ],
-   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-   allowedHeaders: [
-       'Origin',
-       'X-Requested-With',
-       'Content-Type',
-       'Accept',
-       'Authorization'
-   ],
-   credentials: true,
-   maxAge: 86400 // 24 hours
-};
-// Apply CORS middleware with options
-app.use(cors(corsOptions));
-
-// Handle preflight requests
-app.options('*', cors(corsOptions));
-app.use((req, res, next) => {
-   res.header("Access-Control-Allow-Origin", "https://aa-collab-hub-pro-85dt.vercel.app");
-   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
-   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-   res.header("Access-Control-Allow-Credentials", "true");
-   next();
-});
 
 // install view engine
 app.set('view engine', 'ejs') 
