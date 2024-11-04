@@ -23,12 +23,7 @@ connectDB();
 
 // Use the CORS middleware
 app.use(cors({
-   // origin: '*', // Allow requests from all origin
-   origin: [
-      'http://localhost:5173',  // Vite default dev server
-      'https://aa-collab-hub-pro-85dt.vercel.app/',
-      'https://collabhub-c0vc.onrender.com'
-    ],
+   origin: '*', // Allow requests from all origin
 }));
 app.options('*', cors()); // Enable CORS preflight for all routes
 
