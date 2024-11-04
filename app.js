@@ -49,6 +49,13 @@ app.use(cors(corsOptions));
 
 // Handle preflight requests
 app.options('*', cors(corsOptions));
+app.use((req, res, next) => {
+   res.header("Access-Control-Allow-Origin", "https://aa-collab-hub-pro-85dt.vercel.app");
+   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
+   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+   res.header("Access-Control-Allow-Credentials", "true");
+   next();
+});
 
 // install view engine
 app.set('view engine', 'ejs') 
