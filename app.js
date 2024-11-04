@@ -21,62 +21,42 @@ dotenv.config();
 // Connect to the database
 connectDB();
 
-// Simplified CORS configuration - place this BEFORE other middleware
-app.use(cors());
-app.options('*', cors()); // enable pre-flight for all routes
+// Use the CORS middleware
+app.use(cors({
+   // origin: '*', // Allow requests from all origin
+   origin: [
+      'http://localhost:5173',  // Vite default dev server
+      'https://aa-collab-hub-pro-85dt.vercel.app/',
+      'https://collabhub-c0vc.onrender.com'
+    ],
+}));
+app.options('*', cors()); // Enable CORS preflight for all routes
 
-// view engine setup
+
+// install view engine
 app.set('view engine', 'ejs') 
 app.set('views', path.join(__dirname, 'views'));
 
-// Middleware
+// Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+// Middleware to parse incoming JSON requests
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Simple middleware to add headers
-app.use((req, res, next) => {
-   res.setHeader('Access-Control-Allow-Origin', '*');
-   res.setHeader('Access-Control-Allow-Methods', '*');
-   res.setHeader('Access-Control-Allow-Headers', '*');
-   next();
- });
- 
- // Routes
- app.use('/users', userRouter);
- 
- // Error handling middleware
- app.use((err, req, res, next) => {
+// Use routes
+app.use('/users', userRouter);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
    console.error(err.stack);
    res.status(500).json({ 
      success: false, 
      message: 'Internal Server Error'
    });
 });
-
-// // install view engine
-// app.set('view engine', 'ejs') 
-// app.set('views', path.join(__dirname, 'views'));
-
-// // Serve static files from the "public" directory
-// app.use(express.static(path.join(__dirname, 'public')));
-
-
-// // Middleware to parse incoming JSON requests
-// app.use(bodyParser.json());
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
-
-// // Use the CORS middleware
-// app.use(cors({
-//    origin: '*', // Allow requests from all origin
-//    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-// }));
-
-
-// // Use routes
-// app.use('/users', userRouter);
 
 
 module.exports= app;
