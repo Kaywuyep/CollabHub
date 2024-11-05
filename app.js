@@ -27,16 +27,19 @@ connectDB();
 // }));
 
 const corsOpts = {
-  origin: '*',
-
+  // origin: '*',
+  origin: [
+    'https://aa-collab-hub-pro-85dt.vercel.app',
+    'http://localhost:5173'
+  ],
   methods: [
     'GET',
     'POST',
   ],
-
   allowedHeaders: [
     'Content-Type',
   ],
+  credentials: true,
 };
 
 app.use(cors(corsOpts))
